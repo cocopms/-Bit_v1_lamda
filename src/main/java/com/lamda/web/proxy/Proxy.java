@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 import java.util.function.Function; //스프링이 아닌 자바 것을 쓸 것
 import java.util.function.Predicate;
 
-@Component("pxy") @Lazy //타입정의
+@Component("pxy") @Lazy //타입정의, pxy는 고정 : shallow copy(또다른게 없음)
 public class Proxy {
     //타입 통일
     //크롤링하는 모든 것을 String으로 만들겠다

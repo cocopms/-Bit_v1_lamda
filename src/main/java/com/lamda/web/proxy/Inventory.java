@@ -3,7 +3,6 @@ package com.lamda.web.proxy;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.function.Function;
 
@@ -21,7 +20,8 @@ public class Inventory<T> {
     }
 
     public T get(int i) {
-        Function<Integer, T> f = inventory :: get;
+        Function<Integer, T> f = inventory :: get; //f의 리턴값 : function은 무조건 parameter, return값 있음
+        //Function<Integer, T> f = p -> inventory.get(p); what is 'p'? function은 반드시 return값을 갖는데 어떤 타입이든 상관 없음 : 다형성
         return f.apply(i);
     }
 

@@ -1,68 +1,155 @@
 <template>
-  <v-container>
-    <div class="wrap">
-      <div class="search">
-        <input type="text" class="searchTerm" placeholder="search">
-        <button type="submit" class="searchButton">
-          <i class="fa fa-search"></i>
-        </button>
+  <div>
+    <div id="top">
+      <a>Gmail</a>
+      <a>이미지</a>
+      <input id="login" type="button" value="로그인">
+    </div>
+    <br>
+    <div>
+      <img id="google" src="https://www.google.co.kr/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" title="Google">
+    </div>
+    <div>
+      <input id="search" v-model="searchWord" type="text" style=" background-repeat: no-repeat; background-position: 88% 50%, 98% 50%;" title="검색">
+    </div>
+    <div id="box">
+      <input  @click="search" id="google_search" type="button" value="Google 검색">
+    </div>
+    <div id="bottom">
+      <div id="bottom_left">
+        <a>광고</a>
+        <a>비즈니스</a>
+        <a>Google 정보</a>
+      </div>
+      <div id="bottom_right">
+        <a>개인정보처리방침</a>
+        <a>약관</a>
+        <a>설정</a>
       </div>
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
-  export default {
+  import {mapState} from 'vuex'
+  /*import crawling from "../store/crawling"; /!
+  * vuex들중 state만 map연결한 덩어리들,
+  * 왜 {}? 총 4개라서 4개중에 하나만 가져와라..
+  * {} 빠지면 일반 mapState가 되어버림..!*/
 
+  export default {
+    data(){
+      return {
+        searchWord: ''
+      }
+    },
+    computed: {
+      ...mapState({ /*여러개일 때 : ...씀, 여러개중 하나*/
+      bugsmusic: (state)=> state.crawling.bugsmusic /*모듈화*/
+      /*bugsmusic2: crawling.state.bugsmusic 정석*/
+      })
+    }, /*표현식*/
+    methods: {
+      search() {
+        this.$store.dispatch('crawling/search',this.searchWord)
+      }
+    }
   }
 </script>
 
 <style scoped>
-  @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-
   body{
-    background: #f2f2f2;
-    font-family: 'Open Sans', sans-serif;
+    margin: 0px;
+    min-width: 1050px;
+    min-height: 550px;
   }
-
-  .search {
-    width: 100%;
-    position: relative;
-    display: flex;
+  #top{
+    margin: 5px 5px;
+    float: right;
   }
-
-  .searchTerm {
-    width: 100%;
-    border: 3px solid dimgray;
-    border-right: none;
-    padding: 5px;
-    height: 35px;
-    border-radius: 5px 0 0 5px;
-    outline: none;
-    color: #9DBFAF;
+  a{
+    text-decoration: none;
+    font-size: 10.5pt;
+    margin: 0px 10px;
+    color: grey;
   }
-
-  .searchTerm:focus{
-    color: dimgray;
+  a:hover{
+    text-decoration: underline;
   }
-
-  .searchButton {
-    width: 40px;
-    height: 36px;
-    border: 1px solid dimgray;
-    background: dimgray;
+  img{
+    margin: 10px 7px;
+    width: 20px;
+    vertical-align: middle;
+  }
+  #login{
+    background-color: #4485F3;
+    color: #FFFFFF;
+    width: 70px;
+    height: 30px;
+    border: none;
+    vertical-align: middle;
+    margin: 10px 12px 10px 7px;
+    font-weight: bold;
+    font-size: 10pt;
+    border-radius: 2px;
+  }
+  #google{
+    display: block;
+    width: 290px;
+    height: 100px;
+    margin: 180px auto 20px;
+  }
+  #search{
+    display: block;
+    margin: 0 auto;
+    width: 550px;
+    height: 50px;
+    font-size: 15pt;
+    box-shadow: 3px 3px 5px #C3C3C3;
+    border: 1px solid #EAEAEA;
+  }
+  #box{
     text-align: center;
-    color: #fff;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-    font-size: 20px;
   }
-
-  .wrap{
-    width: 30%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  #google_search{
+    width: 135px;
+    height: 40px;
+    margin: 30px 3px;
+    border: none;
+    background-color: #F4F4F4;
+    font-weight: bold;
+    color: grey;
+  }
+  #Feeling_Lucky{
+    width: 180px;
+    height: 40px;
+    margin: 30px 3px;
+    border: none;
+    background-color: #F4F4F4;
+    font-weight: bold;
+    color: grey;
+  }
+  #google_search:hover, #Feeling_Lucky:hover{
+    border: 1px solid #C6C6C6;
+    color: black;
+  }
+  #bottom{
+    border:1px solid #E4E4E4;
+    border-right: none;
+    border-left: none;
+    position:absolute;
+    bottom: 0px;
+    background-color: #F2F2F2;
+    height: 50px;
+    width: 100%;
+    min-width: 1050px;
+  }
+  #bottom_left{
+    float: left;
+    padding: 15px;
+  }
+  #bottom_right{
+    float: right;
+    padding: 15px;
   }
 </style>

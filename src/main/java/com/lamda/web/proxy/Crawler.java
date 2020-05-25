@@ -4,13 +4,14 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-@Component("crawler")
+@Component("crawler") @Lazy
 public class Crawler extends Proxy {
     @Autowired Inventory<HashMap<String, String>> inventory;
     @Autowired Box<String> box; //크롤링할 걸 모두 문자열로 받을 것이기 때문에 String

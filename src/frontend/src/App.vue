@@ -10,8 +10,6 @@
 import Search from './components/Search';
 
 export default {
-  name: 'App',
-
   components: {
     Search,
   },
@@ -20,4 +18,4 @@ export default {
     //
   }),
 };
-</script>
+</script>d

@@ -6,6 +6,6 @@ Vue.use(Router)
 export default new Router({
     mode: 'history',
     routes: [
-        {path: '/chart', component: Search}
+        {path: '/bugsmusic', name: 'bugsmusic', component: Search}
     ]
 })
